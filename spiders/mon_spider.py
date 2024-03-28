@@ -7,7 +7,7 @@ class MonSpiderSpider(scrapy.Spider):
     start_urls = ["https://www.hellowork.com/fr-fr/"]
     custom_settings = {
         'ROBOTSTXT_OBEY': False,
-        'DOWNLOAD_DELAY': 20  # Ajoutez un délai de 3 secondes entre chaque requête
+        'DOWNLOAD_DELAY': 20  # Ajout d'un de 3 secondes entre chaque requête
     }
 
     def parse(self, response):
