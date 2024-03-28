@@ -11,7 +11,7 @@ Ce spider extrait le texte des balises `<h1>` situées dans la page d'accueil du
 Pour exécuter ce spider, assurez-vous d'avoir Scrapy installé et exécutez la commande suivante dans le terminal :
 
 
-- scrapy crawl mon_spider -o output.json
+- !scrapy crawl mon_spider
 
 
 Cela lancera le spider qui collectera les données et les enregistrera dans un fichier JSON nommé `output.json`.
@@ -25,7 +25,7 @@ Ce spider extrait des informations sur les offres d'emploi pour le poste de dév
 Pour exécuter ce spider, utilisez la même procédure que pour le premier spider :
 
 
-- scrapy crawl jobspider -o jobs.json
+- !scrapy crawl jobspider
 
 
 Les données extraites seront enregistrées dans un fichier JSON nommé `jobs.json`.
