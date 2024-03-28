@@ -1,44 +1,40 @@
 import scrapy
+import pandas as pd
+import time
 
-class JobspiderSpider(scrapy.Spider):
+class JobSpider(scrapy.Spider):
     name = "jobspider"
     allowed_domains = ["www.hellowork.com"]
     start_urls = ["https://www.hellowork.com/fr-fr/emploi/recherche.html?k=D%C3%A9veloppeur+logiciel"]
     custom_settings = {
-        'ROBOTSTXT_OBEY': False
+        'ROBOTSTXT_OBEY': False,
+        'DOWNLOAD_DELAY': 20  # Ajoutez un délai de 3 secondes entre chaque requête
     }
 
     def parse(self, response):
-        # Sélectionner toutes les balises <li> contenant une balise <ul>
-        li_with_ul_elements = response.xpath('//li[ul]')
+        # Liste pour stocker les données extraites
+        data = []
 
-        # Itérer sur chaque balise <li> sélectionnée
-        for li_element in li_with_ul_elements:
-            # Extraire le texte de la balise <ul> à l'intérieur de la balise <li>
-            ul_text = li_element.xpath('./ul//text()').getall()
-            # Concaténer le texte extrait en une seule chaîne
-            ul_text_combined = ' '.join(ul_text).strip()
+        # Utilisez les sélecteurs CSS ou XPath pour cibler les balises h3 contenant les offres d'emploi
+        job_elements = response.css('h3')
 
-            # Extraction du salaire
-            salary = response.css('tw-tag-attractive-s tw-readonly::text').get()
+        for job_element in job_elements:
+            # Accédez à la balise <a> contenant le titre de l'offre d'emploi
+            title_element = job_element.css('a')
 
-            # Extraction du poste
-            job_title = response.css('span[data-cy="jobTitle"]::text').get()
+            # Extrayez le titre de l'offre d'emploi s'il existe
+            if title_element:
+                title = title_element.attrib['title']
+            else:
+                title = None
 
-            # Extraction de la localisation
-            location = response.css('span.tw-text-grey::text').get()
+            # Ajoutez les données extraites à la liste
+            data.append({
+                'Title': title
+            })
 
-            # Extraction du type de poste
-            job_type = response.css('span.tw-inline-flex.tw-typo-m.tw-text-grey::text').get()
+        # Créez un DataFrame pandas à partir des données extraites
+        df = pd.DataFrame(data)
 
-            # Extraction du texte dans la balise <p>
-            description = response.css('p::text').get()
-
-            yield {
-                'salary': salary.strip() if salary else None,
-                'ul_text': ul_text_combined if ul_text_combined else None,
-                'job_title': job_title.strip() if job_title else None,
-                'location': location.strip() if location else None,
-                'job_type': job_type.strip() if job_type else None,
-                'description': description.strip() if description else None
-            }
+        # Affichez le DataFrame
+        print(df)
