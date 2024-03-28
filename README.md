@@ -1,46 +1,38 @@
-# Projet de Scraping avec Scrapy
+# Projet Scrapy - Extraction de données depuis HelloWork
 
-Ce projet contient deux spiders Scrapy conçus pour extraire des données du site www.hellowork.com.
+Ce projet utilise Scrapy pour extraire des données à partir du site web HelloWork (www.hellowork.com).
 
-## Spider 1 : MonSpider
+## Spiders
 
-Ce spider extrait le texte des balises `<h1>` situées dans la page d'accueil du site.
+Le projet contient trois spiders, chacun ayant un but spécifique :
 
-### Utilisation
+1. **JobSpider**
+    - Ce spider extrait les offres d'emploi disponibles sur HelloWork, y compris le titre de l'offre, le salaire et la localisation.
+    - L'URL de départ pour ce spider est : [https://www.hellowork.com/fr-fr/emploi/recherche.html?k=D%C3%A9veloppeur+logiciel&msa=21000&p=1](https://www.hellowork.com/fr-fr/emploi/recherche.html?k=D%C3%A9veloppeur+logiciel&msa=21000&p=1)
 
-Pour exécuter ce spider, assurez-vous d'avoir Scrapy installé et exécutez la commande suivante dans le terminal :
+2. **JobSpider2**
+    - Ce spider extrait également les offres d'emploi pour les développeurs logiciels sur HelloWork, mais il utilise une autre méthode pour extraire les informations de salaire.
+    - L'URL de départ pour ce spider est : [https://www.hellowork.com/fr-fr/emploi/recherche.html?k=D%C3%A9veloppeur+logiciel](https://www.hellowork.com/fr-fr/emploi/recherche.html?k=D%C3%A9veloppeur+logiciel)
 
+3. **MonSpider**
+    - Ce spider extrait un élément spécifique de la page HelloWork, en l'occurrence le texte contenu dans les balises `h1`.
+    - L'URL de départ pour ce spider est : [https://www.hellowork.com/fr-fr/](https://www.hellowork.com/fr-fr/)
 
-- !scrapy crawl mon_spider
+## Configuration
 
+Chaque spider est configuré pour respecter un délai de téléchargement entre chaque requête de 20 secondes afin de ne pas surcharger le serveur.
 
-Cela lancera le spider qui collectera les données et les enregistrera dans un fichier JSON nommé `output.json`.
+## Utilisation
 
-## Spider 2 : Jobspider
+Pour utiliser ce projet, assurez-vous d'avoir Python et Scrapy installés. Ensuite, suivez ces étapes :
 
-Ce spider extrait des informations sur les offres d'emploi pour le poste de développeur logiciel à partir de la page de recherche du site.
+1. Cloner le dépôt : `git clone https://github.com/Ayakhin/ScrapingHelloWork`
+2. Accéder au répertoire du projet : `cd helloworkproj`
+3. Exécuter le spider souhaité : 
+   - Pour le JobSpider : `scrapy crawl jobspider`
+   - Pour le JobSpider2 : `scrapy crawl jobspider2`
+   - Pour le MonSpider : `scrapy crawl mon_spider`
 
-### Utilisation
+Les données extraites seront affichées dans la console et peuvent être également enregistrées dans des fichiers ou traitées selon vos besoins.
 
-Pour exécuter ce spider, utilisez la même procédure que pour le premier spider :
-
-
-- !scrapy crawl jobspider
-
-
-Les données extraites seront enregistrées dans un fichier JSON nommé `jobs.json`.
-
-### Installation
-
-Pour exécuter ces spiders, vous aurez besoin de Python et de Scrapy installés sur votre machine. Vous pouvez les installer en exécutant la commande suivante :
-
-
-Les données extraites seront enregistrées dans un fichier JSON nommé `jobs.json`.
-
-### Installation
-
-Pour exécuter ces spiders, vous aurez besoin de Python, Scrapy et de pandas installés sur votre machine. Vous pouvez les installer en exécutant la commande suivante :
-
-- pip install scrapy
-- pip install pandas
-
+---
