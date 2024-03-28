@@ -39,8 +39,8 @@ Les données extraites seront enregistrées dans un fichier JSON nommé `jobs.js
 
 ### Installation
 
-Pour exécuter ces spiders, vous aurez besoin de Python et de Scrapy installés sur votre machine. Vous pouvez les installer en exécutant la commande suivante :
+Pour exécuter ces spiders, vous aurez besoin de Python, Scrapy et de pandas installés sur votre machine. Vous pouvez les installer en exécutant la commande suivante :
 
 - pip install scrapy
-
+- pip install pandas
 
