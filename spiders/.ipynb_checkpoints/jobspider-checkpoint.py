@@ -32,7 +32,7 @@ class JobSpider(scrapy.Spider):
 
             # Remplacer les caractères spéciaux dans les informations sur le salaire
             if salary_info:
-                salary_info = salary_info.replace('\u202f', ' ').strip()
+                salary_info = salary_info.strip().replace('\u202f', ' ')
 
             # Extrayez le titre de l'offre d'emploi s'il existe
             if title_element:
