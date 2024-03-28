@@ -1,0 +1,2 @@
+scrapy==2.5.0
+mysqlclient==2.1.0
